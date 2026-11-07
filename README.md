@@ -1,81 +1,82 @@
-DupFinder
+<div align="center">
+🔍 DupFinder
+Find duplicate files and free up your disk space
 
-A small tool written in C that finds duplicate files on your computer and helps you delete the extra copies to free up space.
+A fast command-line tool written in C that finds identical files by their content, not by their names, and safely removes the extra copies.
 
-What does it do?
+Show Image Show Image Show Image
 
-Over time, folders like Downloads fill up with the same file saved many times: the same PDF, the same photo, the same installer. The names are often different (report.pdf, report (1).pdf, report_final.pdf), so it's hard to notice.
+✨ Features • 📥 Download • 🚀 Usage • ⚙️ How it works • ⚠️ Warnings
 
-DupFinder ignores the names and looks at the content of the files. If two files are exactly the same, it tells you.
+</div>
+🤔 What problem does it solve?
 
-Features
-Scans a folder and all the folders inside it
-Finds files with exactly the same content, even if the names are different
-Shows the duplicates in groups
-Tells you how much space is wasted
-Can delete the extra copies and keep one file from each group
-Asks you for confirmation before deleting anything
-Fast: it only reads the full content of files that have the same size
-Where can you use it?
-Cleaning your Downloads folder
-Cleaning folders full of photos or screenshots
-Organizing university or work files you copied many times
-Freeing space on your laptop
+Over time, folders like Downloads fill up with the same file saved again and again: the same PDF, the same photo, the same installer.
 
-Works on Windows, Linux and macOS.
+The names are often different (report.pdf, report (1).pdf, report_final.pdf), so you can't see them. DupFinder ignores the names and compares the real content, so it finds every exact copy.
 
-How to download it
+✨ Features
+	Feature
+📂	Scans a folder and all its subfolders
+🧬	Finds identical files even with different names
+📊	Shows duplicates in groups
+💾	Tells you how much space is wasted
+🗑️	Deletes the extra copies and keeps one of each
+✅	Asks for confirmation before deleting anything
+⚡	Fast: only reads the full content of files with the same size
+💻	Works on Windows, Linux and macOS
+🎯 Where can you use it?
+📥 Cleaning your Downloads folder
+🖼️ Cleaning folders full of photos and screenshots
+🎓 Organizing university or work files you copied many times
+🧹 Freeing space on your laptop
+📥 Download
 
-First download the project: on this page click the green Code button, then Download ZIP, and unzip it. (If you use git, you can run git clone https://github.com/ouelaamohamed1-lab/DupFinder.git instead.)
+Option 1: Download the ZIP (easiest)
 
-Then open a terminal inside the project folder (the one that contains dupfinder.c).
+Click the green Code button at the top of this page
+Click Download ZIP
+Unzip it
 
-Then compile it. You need a C compiler (gcc).
+Option 2: Use git
 
-Linux (Ubuntu / Debian)
+git clone https://github.com/ouelaamohamed1-lab/DupFinder.git
+🔧 Compile
+
+You need a C compiler (gcc). Open a terminal inside the project folder (the one containing dupfinder.c), then follow your system:
+
+🐧 Linux (Ubuntu / Debian)
 sudo apt install build-essential
 gcc -Wall -o dupfinder dupfinder.c
-macOS
+🍎 macOS
 xcode-select --install
 gcc -Wall -o dupfinder dupfinder.c
-Windows
-Install a compiler, for example MSYS2 (then run pacman -S mingw-w64-ucrt-x86_64-gcc in its terminal) or w64devkit.
+🪟 Windows
+Install a compiler: MSYS2 (then run pacman -S mingw-w64-ucrt-x86_64-gcc in its terminal) or w64devkit
 Open a terminal in the project folder and run:
 gcc -Wall -o dupfinder.exe dupfinder.c
 
-That's it. The program is ready.
+✅ Done! The program is ready.
 
-How to use it
-
-To see the duplicates in a folder (nothing is deleted):
-
-Linux / macOS:
-
-./dupfinder ~/Downloads
-
-Windows:
-
-dupfinder.exe C:\Users\YourName\Downloads
-
-To see the duplicates and then delete the extra copies:
-
-Linux / macOS:
-
-./dupfinder ~/Downloads --delete
-
-Windows:
-
-dupfinder.exe C:\Users\YourName\Downloads --delete
+🚀 Usage
+👀 See the duplicates (nothing is deleted)
+System	Command
+🐧 Linux / 🍎 macOS	./dupfinder ~/Downloads
+🪟 Windows	dupfinder.exe C:\Users\YourName\Downloads
+🗑️ See the duplicates, then delete the extra copies
+System	Command
+🐧 Linux / 🍎 macOS	./dupfinder ~/Downloads --delete
+🪟 Windows	dupfinder.exe C:\Users\YourName\Downloads --delete
 
 The program shows the list and asks:
 
 Delete the copies and keep one file per group? (y/n)
 
-Type y and press Enter to delete, or n to cancel.
+Type y to delete or n to cancel.
 
-To scan any other folder, replace the folder path with the one you want. If the path has spaces, put it in quotes: "C:\Users\Your Name\Pictures".
+💡 Tip: To scan another folder, just replace the path. If the path has spaces, put it in quotes: "C:\Users\Your Name\Pictures"
 
-Example output
+📸 Example output
 Scanning test ...
 Found 7 files.
 
@@ -90,36 +91,45 @@ Group 2  (97.66 KB each)
 
 3 duplicate files, wasting 97.68 KB.
 Run again with --delete to remove the copies.
-keep is the file that stays.
-copy is an extra copy that --delete will remove.
-Important warnings
-Deleted files do not go to the trash. They are gone for good.
-Make a backup first if the files are important (just copy the folder).
-Run the program without --delete first and read the list.
-The program keeps the first file it finds in each group. This might not be the one you prefer.
-How does it work?
+Word	Meaning
+keep	✅ The file that stays
+copy	🗑️ An extra copy that --delete will remove
+⚙️ How it works
 
-It uses three simple steps, from fastest to slowest:
+DupFinder checks files in 3 steps, from the fastest to the slowest:
 
-Compare sizes. Two files with different sizes can't be the same, so they are skipped right away.
-Compare hashes. A hash is a number calculated from the content of a file. Identical files always give the same number.
-Compare byte by byte. To be 100% sure, the program compares the real content of the files that passed steps 1 and 2.
+Step	What it does	Why
+1️⃣ Size	Compares file sizes	Files with different sizes can't be identical, so they are skipped instantly
+2️⃣ Hash	Calculates a number from the file content	Identical files always give the same number
+3️⃣ Byte by byte	Compares the real content	Makes sure the files are 100% identical
 
-This way it doesn't waste time reading every file completely.
+This way the program never wastes time reading every file completely. ⚡
 
-What I learned building it
-Working with folders and files in C
-Dynamic memory (realloc, free)
-Recursion (scanning folders inside folders)
-Hashing and sorting (qsort)
-Reading command-line arguments
-Limitations and ideas for the future
-Doesn't follow shortcuts (symbolic links) and ignores empty files
-On Windows, folder names with special characters (like Arabic letters) may not be read
-Choose which copy to keep (oldest or shortest path)
-Move copies to a folder instead of deleting them
-Option to ignore small files (--min-size)
-A stronger hash such as SHA-256
-Author
+⚠️ Warnings
 
-Made by Ouelaa Mohamed Said, electronics student. Feel free to open an issue or suggest an improvement.
+[!WARNING] Deleted files do not go to the trash. They are gone for good.
+
+💾 Make a backup first if the files are important (just copy the folder)
+👀 Run the program without --delete first and read the list
+📌 The program keeps the first file it finds in each group, which may not be the one you prefer
+🧠 What I learned building it
+📁 Working with folders and files in C
+🧮 Dynamic memory (realloc, free)
+🔁 Recursion (scanning folders inside folders)
+🔢 Hashing and sorting (qsort)
+⌨️ Reading command-line arguments
+🌍 Writing code that works on different operating systems
+🛣️ Future ideas
+ Choose which copy to keep (the oldest or the shortest path)
+ Move copies to a folder instead of deleting them
+ Option to ignore small files (--min-size)
+ A stronger hash such as SHA-256
+ Support for folder names with special characters on Windows
+
+Current limits: ignores shortcuts (symbolic links) and empty files.
+
+👤 Author
+
+Ouelaa Mohamed Said: Electronics student
+
+💬 Found a bug or have an idea? Open an Issue or send a suggestion. ⭐ If you like the project, give it a star!
