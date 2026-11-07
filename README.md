@@ -4,9 +4,6 @@ Find duplicate files and free up your disk space
 
 A fast command-line tool written in C that finds identical files by their content, not by their names, and safely removes the extra copies.
 
-Show Image Show Image Show Image
-
-✨ Features • 📥 Download • 🚀 Usage • ⚙️ How it works • ⚠️ Warnings
 
 </div>
 🤔 What problem does it solve?
